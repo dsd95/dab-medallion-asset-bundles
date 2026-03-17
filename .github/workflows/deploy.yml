@@ -1,0 +1,32 @@
+name: Deploy to Databricks
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Databricks CLI
+        run: pip install databricks-cli
+
+      - name: Deploy to DEV
+        if: github.ref == 'refs/heads/dev'
+        run: databricks bundle deploy --target dev
+        env:
+          DATABRICKS_HOST: ${{ secrets.DEV_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DEV_TOKEN }}
+
+      - name: Deploy to PROD
+        if: github.ref == 'refs/heads/main'
+        run: databricks bundle deploy --target prod
+        env:
+          DATABRICKS_HOST: ${{ secrets.PROD_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.PROD_TOKEN }}
