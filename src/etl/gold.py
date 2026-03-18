@@ -3,8 +3,6 @@ from pyspark.sql.functions import count
 
 spark = SparkSession.builder.getOrCreate()
 
-df = spark.table("dab_demo_silver.data_clean")
-
+df = spark.table("medallion_lab.dab_demo_silver.data_clean")
 result = df.agg(count("*").alias("total_records"))
-
-result.write.mode("overwrite").saveAsTable("dab_demo_gold.metrics")
+result.write.mode("overwrite").saveAsTable("medallion_lab.dab_demo_gold.metrics")
