@@ -1,9 +1,16 @@
 bundle:
   name: dab_medallion_lab
 
+include:
+  - resources/*.yml
+
 targets:
-  dev: 
-    workspace: {} # CLI v2 vai ler DATABRICKS_HOST e DATABRICKS_TOKEN do workflow
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405608824163183.3.azuredatabricks.net/
 
   prod:
-    workspace: {}
+    workspace:
+      host: https://adb-7405604989688915.15.azuredatabricks.net/
