@@ -1,13 +1,16 @@
 bundle:
   name: dab_medallion_lab
 
+include:
+  - resources/*.yml
+
 targets:
   dev:
-    workspace: {}
-    variables:
-      cluster_id: "0311-111431-njsnwucy"
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405608824163183.3.azuredatabricks.net/
 
   prod:
-    workspace: {}
-    variables:
-      cluster_id: "0318-111523-xoo4md9u"
+    workspace:
+      host: https://adb-7405604989688915.15.azuredatabricks.net/
