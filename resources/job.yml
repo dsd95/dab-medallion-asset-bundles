@@ -5,20 +5,20 @@ resources:
 
       tasks:
         - task_key: ingest
-          existing_cluster_id: ${var.cluster_id}
+          existing_cluster_id: "0311-111431-njsnwucy"
           spark_python_task:
             python_file: src/etl/ingest.py
 
         - task_key: transform
           depends_on:
             - task_key: ingest
-          existing_cluster_id: ${var.cluster_id}
+          existing_cluster_id: "0311-111431-njsnwucy"
           spark_python_task:
             python_file: src/etl/transform.py
 
         - task_key: gold
           depends_on:
             - task_key: transform
-          existing_cluster_id: ${var.cluster_id}
+          existing_cluster_id: "0311-111431-njsnwucy"
           spark_python_task:
             python_file: src/etl/gold.py
