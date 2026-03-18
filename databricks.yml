@@ -2,8 +2,12 @@ bundle:
   name: dab_medallion_lab
 
 targets:
-  dev: 
-    workspace: {} # CLI v2 vai ler DATABRICKS_HOST e DATABRICKS_TOKEN do workflow
+  dev:
+    workspace: {}
+    variables:
+      cluster_id: "0311-111431-njsnwucy"
 
   prod:
     workspace: {}
+    variables:
+      cluster_id: "0318-111523-xoo4md9u"
