@@ -1,21 +1,10 @@
-resources:
-  jobs:
-    medallion_job:
-      name: medallion_job
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import count
 
-      tasks:
-        - task_key: ingest
-          spark_python_task:
-            python_file: ../src/etl/ingest.py
+spark = SparkSession.builder.getOrCreate()
 
-        - task_key: transform
-          depends_on:
-            - task_key: ingest
-          spark_python_task:
-            python_file: ../src/etl/transform.py
+df = spark.table("dab_demo_silver.data_clean")
 
-        - task_key: gold
-          depends_on:
-            - task_key: transform
-          spark_python_task:
-            python_file: ../src/etl/gold.py
+result = df.agg(count("*").alias("total_records"))
+
+result.write.mode("overwrite").saveAsTable("dab_demo_gold.metrics")
