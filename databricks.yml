@@ -3,7 +3,7 @@ bundle:
 
 targets:
   dev: 
-    workspace: {}
+    workspace: {} # CLI v2 vai ler DATABRICKS_HOST e DATABRICKS_TOKEN do workflow
 
   prod:
     workspace: {}
