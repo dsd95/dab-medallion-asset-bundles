@@ -2,10 +2,8 @@ bundle:
   name: dab_medallion_lab
 
 targets:
-  dev:
-    workspace:
-      host: ${env.DEV_HOST}
+  dev: 
+    workspace: {}
 
   prod:
-    workspace:
-      host: ${env.PROD_HOST}
+    workspace: {}
